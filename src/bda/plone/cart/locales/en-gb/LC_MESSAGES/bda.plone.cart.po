@@ -1,166 +1,165 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: bda.plone.shipping\n"
+"Project-Id-Version: bda.plone.cart\n"
 "POT-Creation-Date: 2014-06-04 11:49+0000\n"
-"PO-Revision-Date: 2013-06-12 14:38+0100\n"
-"Last-Translator: Peter Holzer <peter.holzer@agitator.com>\n"
+"PO-Revision-Date: 2014-06-04 14:33 +1200\n"
+"Last-Translator: Robyn James <robyn@thevirtual.co.nz>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: it\n"
-"Language-Name: Italian\n"
+"Language-Code: en-gb\n"
+"Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: bda.plone.shipping\n"
-"X-Is-Fallback-For: it-ch it-it\n"
+"Domain: bda.plone.cart\n"
 
 #: ./browser/__init__.py:172
 msgid "Add Cart Portlet"
-msgstr "Aggiungere il portlet del carrello"
+msgstr "Add Cart Portlet"
 
 #: ./browser/__init__.py:173
 msgid "This portlet displays the shopping cart."
-msgstr "Questo portlet mostra il carrello"
+msgstr "This portlet displays the shopping cart."
 
 #. Default: "Article limit reached"
 #: ./__init__.py:283
 msgid "article_limit_reached"
-msgstr ""
+msgstr "Cart item limit reached"
 
 #: ./browser/summary.pt:110
 msgid "back"
-msgstr "indietro"
+msgstr "Back"
 
 #. Default: "Cart"
 #: ./browser/__init__.py:133
 #: ./browser/portlet.pt:8
 #: ./browser/view.pt:18
 msgid "cart"
-msgstr "Carrello"
+msgstr "Cart"
 
 #. Default: "Comment is required"
 #: ./browser/__init__.py:56
 msgid "cart_comment_required"
-msgstr ""
+msgstr "Comment is required"
 
 #. Default: "Input not an integer"
 #: ./browser/__init__.py:60
 msgid "cart_integer_required"
-msgstr ""
+msgstr "Input not an integer"
 
 #. Default: "Invalid comment characters"
 #: ./browser/__init__.py:52
 msgid "cart_invalid_comment_character"
-msgstr ""
+msgstr "Comment contains invalid characters"
 
 #. Default: "Unique article limit reached"
 #: ./browser/__init__.py:48
 msgid "cart_max_unique_articles_reached"
-msgstr ""
+msgstr "Unique item limit reached"
 
 #. Default: "One or more items in cart are only partly or no longer available. Please update or remove related items"
 #: ./browser/__init__.py:64
 msgid "cart_no_longer_available"
-msgstr ""
+msgstr "One or more items in cart are only partly or no longer availabale. Please update or remove the relevant items."
 
 #. Default: "Input not a number"
 #: ./browser/__init__.py:44
 msgid "cart_not_a_number"
-msgstr ""
+msgstr "Input is not a number"
 
 #. Default: "Cart"
 #: ./browser/portlet.pt:8
 msgid "cart_summary"
-msgstr "Carrello"
+msgstr "Cart"
 
 #. Default: "Total limit reached"
 #: ./browser/__init__.py:40
 msgid "cart_total_limit_reached"
-msgstr ""
+msgstr "Total limit reached"
 
 #. Default: "Checkout"
 #: ./browser/portlet.pt:20
 #: ./browser/summary.pt:112
 msgid "checkout"
-msgstr "checkout"
+msgstr "Checkout"
 
 #. Default: "Comment:"
 #: ./browser/tile.pt:38
 #, fuzzy
 msgid "comment"
-msgstr "Commenti"
+msgstr "Comment:"
 
 #. Default: "Discount Net:"
 #: ./browser/summary.pt:72
 #: ./browser/tile.pt:70
 msgid "discount_net"
-msgstr ""
+msgstr "Net Discount"
 
 #. Default: "Discount Total:"
 #: ./browser/summary.pt:83
 #: ./browser/tile.pt:81
 msgid "discount_total"
-msgstr ""
+msgstr "Total Discount"
 
 #. Default: "Discount VAT.:"
 #: ./browser/summary.pt:77
 #: ./browser/tile.pt:75
 msgid "discount_vat"
-msgstr ""
+msgstr "Discount VAT"
 
 #. Default: "Cart is empty"
 #: ./browser/summary.pt:54
 #: ./browser/tile.pt:51
 msgid "empty_cart"
-msgstr "Il carrello è vuoto"
+msgstr "Cart is empty"
 
 #. Default: "Price:"
 #: ./browser/summary.pt:42
 #: ./browser/tile.pt:42
 #, fuzzy
 msgid "price"
-msgstr "Prezzo"
+msgstr "Price:"
 
 #. Default: "Remove from cart"
 #: ./browser/summary.pt:35
 #: ./browser/tile.pt:31
 msgid "remove_from_cart"
-msgstr "Togli dal carrello"
+msgstr "Remove from cart"
 
 #. Default: "Net:"
 #: ./browser/summary.pt:62
 #: ./browser/tile.pt:60
 msgid "summary_net"
-msgstr "Netto:"
+msgstr "Net:"
 
 #. Default: "Shipping:"
 #: ./browser/summary.pt:91
 #: ./browser/tile.pt:89
 #, fuzzy
 msgid "summary_shipping"
-msgstr "Totale"
+msgstr "Shipping:"
 
 #. Default: "Total:"
 #: ./browser/summary.pt:99
 #: ./browser/tile.pt:95
 msgid "summary_total"
-msgstr "Totale:"
+msgstr "Total:"
 
 #. Default: "VAT.:"
 #: ./browser/summary.pt:67
 #: ./browser/tile.pt:65
 msgid "summary_vat"
-msgstr "IVA:"
+msgstr "VAT:"
 
 #. Default: "Not enough items available, abort."
 #: ./__init__.py:297
 msgid "trying_to_add_more_items_than_available"
-msgstr ""
+msgstr "Not enough stock available, aborting."
 
 #. Default: "Update cart"
 #: ./browser/summary.pt:26
 #: ./browser/tile.pt:22
 msgid "update_cart"
-msgstr "Aggiorna il carrello"
+msgstr "Update cart"
 

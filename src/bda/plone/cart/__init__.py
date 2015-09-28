@@ -647,7 +647,7 @@ def get_item_preview(context):
 
 def get_catalog_brain(context, uid):
     cat = getToolByName(context, 'portal_catalog')
-    brains = cat(UID=uid)
+    brains = cat.unrestrictedSearchResults(UID=uid)
     if brains:
         if len(brains) > 1:
             raise RuntimeError(
