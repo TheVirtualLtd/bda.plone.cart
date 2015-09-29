@@ -35,6 +35,16 @@ Further some abstract base implementations are available in
 implementations.
 
 
+Cart Visibility
+===============
+
+The cart can be rendered as a portlet or inside a viewlet in the portal
+header. It's not possible to render the cart twice in one page. Thus, the
+viewlet gets skipped automatically if a cart portlet assignment is found.
+Also, if cart summary, checkout, order confirmation or portal factory is
+rendered, regular cart rendering gets skipped.
+
+
 A ready-to-use implementation
 =============================
 
@@ -75,6 +85,14 @@ the "add to Cart" action::
 and the "update cart" action::
 
     <a href="" class="update_cart_item">update cart</a>
+
+Optionally, If cart viewlet is used, a status message can be displayed when
+adding or updating cart items. This is useful if user should get
+clearly informed if cart data has changed. To display status messages,
+add CSS class ``show_status_message`` to "add to cart" and "update cart"
+actions::
+
+    <a href="" class="update_cart_item show_status_message">update cart</a>
 
 and optionally an element defining a comment or an input for entering a
 comment::

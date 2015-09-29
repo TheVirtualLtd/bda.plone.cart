@@ -22,8 +22,9 @@ from zope.i18nmessageid import MessageFactory
 from zope.interface import Interface
 from zope.interface import implementer
 from zope.publisher.interfaces.browser import IBrowserRequest
-import urllib2
 
+import urllib2
+import uuid
 
 _ = MessageFactory('bda.plone.cart')
 
@@ -59,7 +60,7 @@ def ascur(val, comma=False):
 def readcookie(request):
     """Read, unescape and return the cart cookie.
     """
-    return urllib2.unquote(request.cookies.get('cart', ''))
+    return request.cookies.get('cart', '')
 
 
 def deletecookie(request):
@@ -77,14 +78,14 @@ def extractitems(items):
     if not items:
         return []
     ret = list()
-    items = urllib2.unquote(items).split(',')
+    items = items.split(',')
     for item in items:
         if not item:
             continue
         item = item.split(':')
         uid = item[0].split(';')[0]
         count = item[1]
-        comment = item[0][len(uid) + 1:]
+        comment = urllib2.unquote(item[0][len(uid) + 1:])
         ret.append((uid, Decimal(count), comment))
     return ret
 
@@ -108,7 +109,7 @@ def remove_item_from_cart(request, uid):
         if uid == item_uid:
             continue
         cookie_items.append(
-            item_uid + ';' + comment + ':' + str(count))
+            item_uid + ';' + urllib2.quote(comment) + ':' + str(count))
     cookie = ','.join(cookie_items)
     request.response.setCookie('cart', cookie, quoted=False, path='/')
 
@@ -119,7 +120,10 @@ def cart_item_shippable(context, item):
     obj = get_object_by_uid(context, item[0])
     if not obj:
         return False
-    return IShippingItem(obj).shippable
+    shipping_info = queryAdapter(obj, IShippingItem)
+    if shipping_info:
+        return shipping_info.shippable
+    return False
 
 
 @implementer(ICartDataProvider)
@@ -536,6 +540,9 @@ class CartItemStateBase(object):
 
     @property
     def reserved(self):
+        """Return the number of reserved items in the cart from the buyable
+        context.
+        """
         aggregated_count = float(self.aggregated_count)
         stock = get_item_stock(self.context)
         available = stock.available
@@ -647,7 +654,18 @@ def get_item_preview(context):
 
 def get_catalog_brain(context, uid):
     cat = getToolByName(context, 'portal_catalog')
-    brains = cat.unrestrictedSearchResults(UID=uid)
+    if isinstance(uid, uuid.UUID):
+        uid = uid.hex
+    else:
+        # There is a chance that uids come in the form of str(uuid.UUID), like
+        # '8de81513-4317-52d5-f32c-680db93dda0c'. But we need
+        # '8de81513431752d5f32c680db93dda0c'. So convert to uuid and get the
+        # hex value of it to be sure
+        try:
+            uid = uuid.UUID(uid).hex
+        except ValueError:
+            return None
+    brains = cat(UID=uid)
     if brains:
         if len(brains) > 1:
             raise RuntimeError(

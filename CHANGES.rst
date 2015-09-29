@@ -2,10 +2,71 @@
 Changelog
 =========
 
-0.8.dev0
---------
+0.10.dev2
+---------
 
-- no changes yet.
+- Resolve JSHint errors and warnings.
+  [thet]
+
+- Fix cart item not removable, if comment is required. Fixes #17, fixes #12.
+  [thet]
+
+- Remove portlet's cartWrapper div node. It's not used at all and only
+  introduces non-standard portlet HTML markup.
+  [thet]
+
+- By default, cart viewlet is hidden and gets displayed as soon as cart items
+  are fetched.
+  [rnix]
+
+- Consider ``hide cart if empty`` setting on cart viewlet.
+  [rnix]
+
+- Hide unset preview images for cart item.
+  [rnix]
+
+- Cart can display status message if cart data gets modified.
+  [rnix]
+
+- Cart might be rendered as viewlet in portal header instead of as portlet.
+  [rnix]
+
+- Do not expect ``IShippingItem`` to be implemented. See also
+  ``https://github.com/bluedynamics/bda.plone.shop/issues/31``
+  [jensens]
+
+- No caching/merging of cart.translations.js
+  [agitator]
+
+
+
+0.9
+---
+
+- Quote/Unqote special characters in cart cookie only for cart item comment.
+  Thus we can have any characters in comment. "Invalid comment characters"
+  validation and error message no longer necessary.
+  [rnix]
+
+
+0.8
+---
+
+- Use ``decodeURIComponent`` instead of deprectaed ``unescape`` in ``cart.js``.
+  [rnix]
+
+- Catch ``ValueError`` if given uid value is no valid ``uuid.UUID`` string in
+  ``get_catalog_brain``.
+  [rnix]
+
+- Let ``get_catalog_brain`` and thus ``get_object_by_uid`` handle ``uuid.UUID``
+  objects, hex strings like '8de81513431752d5f32c680db93dda0c' and UUID object
+  representation strings like '8de81513-4317-52d5-f32c-680db93dda0c'.
+  [thet]
+
+- Encode umlaut characters in cart item comment.
+  [rnix]
+
 
 0.7
 ---
