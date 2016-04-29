@@ -69,6 +69,7 @@ def deletecookie(request):
     request.response.expireCookie('cart', path='/')
 
 
+
 def extractitems(items):
     """Cart items are stored in a cookie. The format is
     ``uid;comment:count,uid;comment:count,...``.
@@ -98,6 +99,31 @@ def aggregate_cart_item_count(target_uid, items):
         if target_uid == uid:
             aggregated_count += count
     return aggregated_count
+
+
+def add_item_to_cart(request, uid, count=1, comment=''):
+    """Add an item to the cart by uid
+    """
+    original_items = extractitems(readcookie(request))
+    cookie_items = list()
+    for orig_uid, orig_count, orig_comment in original_items:
+        # Update existing cart item when uid and comment match
+        if uid == orig_uid and comment == orig_comment and count:
+            orig_count = orig_count + count
+            count = 0  # ensure we only add items once
+
+        cookie_items.append(
+            orig_uid + ';' + urllib2.quote(orig_comment) + ':' +
+            str(orig_count))
+
+    if count:
+        cookie_items.append(
+            uid + ';' + urllib2.quote(comment) + ':' + str(count))
+
+    cookie = ','.join(cookie_items)
+    request.response.setCookie('cart', cookie, quoted=False, path='/')
+    # update the request to ensure it is consistent with the response cookie
+    request.cookies['cart'] = cookie
 
 
 def remove_item_from_cart(request, uid):
