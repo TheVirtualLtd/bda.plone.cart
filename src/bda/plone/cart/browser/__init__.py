@@ -17,6 +17,7 @@ from zope.i18n import translate
 from zope.i18nmessageid import MessageFactory
 from zope.interface import implementer
 import simplejson as json
+from bda.plone.cart import add_item_to_cart
 
 
 _ = MessageFactory('bda.plone.cart')
@@ -228,5 +229,31 @@ class CartViewlet(ViewletBase, CartMixin):
         # XXX: count total items in cart or total unique items in cart?
         ret = Decimal('0')
         for uid, count, comment in extractitems(readcookie(self.request)):
-           ret += count
+            ret += count
         return ret
+
+
+class AddToCart(BrowserView):
+    def add_to_cart(self, path, amount=1):
+        obj = self.context.restrictedTraverse(path)
+        if obj:
+            add_item_to_cart(request=self.request, uid=obj.UID(), count=amount)
+
+    def __call__(self):
+        # setup query string as:
+        # items.path:records=item1&items.amount:records:int=1
+        #   &items.path:records=item2&items.amount:records:int=3
+        # or ?path=item1&amount=3 (amount defaults to 1)
+
+        if 'item' in self.request.form:
+            for item in self.request.form['item']:
+                self.add_to_cart(item.get('path', ''), item.get('amount', 1))
+        if 'path' in self.request.form:
+            try:
+                amount = int(self.request.form('amount'))
+            except TypeError:
+                amount = 1
+
+            self.add_to_cart(self.request.form('path'), amount)
+
+        return self.context()

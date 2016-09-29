@@ -78,4 +78,11 @@
     permission="zope2.View"
     layer="..interfaces.ICartExtensionLayer" />
 
+  <browser:page
+    for="*"
+    name="add_to_cart"
+    class=".AddToCart"
+    permission="zope2.View"
+    layer="..interfaces.ICartExtensionLayer" />
+
 </configure>

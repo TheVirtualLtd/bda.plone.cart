@@ -1,11 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bda.plone.cart\n"
-<<<<<<< HEAD
-"POT-Creation-Date: 2014-06-04 11:49+0000\n"
-=======
-"POT-Creation-Date: 2014-10-01 14:42+0000\n"
->>>>>>> 4702a05578ee77c5e146815767490580ecc86222
+"POT-Creation-Date: 2016-08-12 04:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: Peter Holzer <hpeter@agitator.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,74 +14,46 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: bda.plone.cart\n"
 
-<<<<<<< HEAD
-#: ./browser/__init__.py:172
-msgid "Add Cart Portlet"
-msgstr "Add Cart Portlet"
+#: ./profiles.zcml:12
+msgid "A generic cart"
+msgstr ""
 
-#: ./browser/__init__.py:173
-=======
 #: ./browser/__init__.py:202
 msgid "Add Cart Portlet"
 msgstr "Add Cart Portlet"
 
 #: ./browser/__init__.py:203
->>>>>>> 4702a05578ee77c5e146815767490580ecc86222
 msgid "This portlet displays the shopping cart."
 msgstr "This portlet displays the shopping cart."
 
 #. Default: "Article limit reached"
-<<<<<<< HEAD
-#: ./__init__.py:283
-=======
-#: ./__init__.py:287
->>>>>>> 4702a05578ee77c5e146815767490580ecc86222
+#: ./__init__.py:313
 msgid "article_limit_reached"
 msgstr "The desired quantity exceeds the maximum order quantity for this product."
 
-<<<<<<< HEAD
-#: ./browser/summary.pt:110
-=======
 #: ./browser/summary.pt:111
->>>>>>> 4702a05578ee77c5e146815767490580ecc86222
 msgid "back"
 msgstr "back"
 
+#: ./profiles.zcml:12
+msgid "bda.plone.cart"
+msgstr ""
+
 #. Default: "Cart"
-<<<<<<< HEAD
-#: ./browser/__init__.py:133
-=======
 #: ./browser/__init__.py:168
->>>>>>> 4702a05578ee77c5e146815767490580ecc86222
-#: ./browser/portlet.pt:8
+#: ./browser/portlet.pt:6
 #: ./browser/view.pt:18
 msgid "cart"
 msgstr "cart"
 
 #. Default: "Comment is required"
-<<<<<<< HEAD
-#: ./browser/__init__.py:56
-=======
 #: ./browser/__init__.py:59
->>>>>>> 4702a05578ee77c5e146815767490580ecc86222
 msgid "cart_comment_required"
 msgstr "Comment is require"
 
 #. Default: "Input not an integer"
-<<<<<<< HEAD
-#: ./browser/__init__.py:60
-msgid "cart_integer_required"
-msgstr "Input not an integer"
-
-#. Default: "Invalid comment characters"
-#: ./browser/__init__.py:52
-msgid "cart_invalid_comment_character"
-msgstr "Invalid comment characters"
-
-#. Default: "Unique article limit reached"
-#: ./browser/__init__.py:48
-=======
 #: ./browser/__init__.py:63
+#, fuzzy
 msgid "cart_integer_required"
 msgstr "Input not an integer"
 
@@ -106,60 +74,40 @@ msgstr "Item has been updated in cart"
 
 #. Default: "Unique article limit reached"
 #: ./browser/__init__.py:55
->>>>>>> 4702a05578ee77c5e146815767490580ecc86222
 msgid "cart_max_unique_articles_reached"
 msgstr "Unique article limit reached"
 
 #. Default: "One or more items in cart are only partly or no longer available. Please update or remove related items"
-<<<<<<< HEAD
-#: ./browser/__init__.py:64
-=======
 #: ./browser/__init__.py:67
->>>>>>> 4702a05578ee77c5e146815767490580ecc86222
 msgid "cart_no_longer_available"
 msgstr "One or more items in cart are only partly or no longer available. Please update or remove related items"
 
 #. Default: "Input not a number"
-<<<<<<< HEAD
-#: ./browser/__init__.py:44
-=======
 #: ./browser/__init__.py:51
->>>>>>> 4702a05578ee77c5e146815767490580ecc86222
 msgid "cart_not_a_number"
 msgstr "Input not a number"
 
 #. Default: "Cart"
-#: ./browser/portlet.pt:8
-#: ./browser/viewlet.pt:5
+#: ./browser/portlet.pt:6
+#: ./browser/viewlet.pt:8
 msgid "cart_summary"
 msgstr "Cart"
 
 #. Default: "Total limit reached"
-<<<<<<< HEAD
-#: ./browser/__init__.py:40
-=======
 #: ./browser/__init__.py:47
->>>>>>> 4702a05578ee77c5e146815767490580ecc86222
 msgid "cart_total_limit_reached"
 msgstr "Total limit reached"
 
 #. Default: "Checkout"
-#: ./browser/portlet.pt:20
-<<<<<<< HEAD
-#: ./browser/summary.pt:112
-msgid "checkout"
-msgstr "checkout"
-
-#. Default: "Comment:"
-=======
+#: ./browser/portlet.pt:18
 #: ./browser/summary.pt:113
-#: ./browser/viewlet.pt:19
+#: ./browser/viewlet.pt:21
+#, fuzzy
 msgid "checkout"
 msgstr "checkout"
 
 #. Default: "Comment"
 #: ./browser/summary.pt:18
->>>>>>> 4702a05578ee77c5e146815767490580ecc86222
 #: ./browser/tile.pt:38
 #, fuzzy
 msgid "comment"
@@ -189,13 +137,8 @@ msgstr "Discount VAT.:"
 msgid "empty_cart"
 msgstr "Cart is empty"
 
-<<<<<<< HEAD
-#. Default: "Price:"
-#: ./browser/summary.pt:42
-=======
 #. Default: "Price"
 #: ./browser/summary.pt:43
->>>>>>> 4702a05578ee77c5e146815767490580ecc86222
 #: ./browser/tile.pt:42
 #, fuzzy
 msgid "price"
@@ -213,25 +156,15 @@ msgstr "Remove from cart"
 msgid "summary_net"
 msgstr "Net:"
 
-<<<<<<< HEAD
-#. Default: "Shipping:"
-#: ./browser/summary.pt:91
-#: ./browser/tile.pt:89
-#, fuzzy
-=======
 #. Default: "Shipping"
 #: ./browser/summary.pt:92
 #: ./browser/tile.pt:89
->>>>>>> 4702a05578ee77c5e146815767490580ecc86222
+#, fuzzy
 msgid "summary_shipping"
 msgstr "Shipping"
 
 #. Default: "Total:"
-<<<<<<< HEAD
-#: ./browser/summary.pt:99
-=======
 #: ./browser/summary.pt:100
->>>>>>> 4702a05578ee77c5e146815767490580ecc86222
 #: ./browser/tile.pt:95
 msgid "summary_total"
 msgstr "Total:"
@@ -243,11 +176,7 @@ msgid "summary_vat"
 msgstr "VAT.:"
 
 #. Default: "Not enough items available, abort."
-<<<<<<< HEAD
-#: ./__init__.py:297
-=======
-#: ./__init__.py:301
->>>>>>> 4702a05578ee77c5e146815767490580ecc86222
+#: ./__init__.py:327
 msgid "trying_to_add_more_items_than_available"
 msgstr "Not enough items available, abort."
 
@@ -256,4 +185,3 @@ msgstr "Not enough items available, abort."
 #: ./browser/tile.pt:22
 msgid "update_cart"
 msgstr "Update cart"
-
