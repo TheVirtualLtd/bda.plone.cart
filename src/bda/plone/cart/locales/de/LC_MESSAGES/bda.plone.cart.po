@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bda.plone.cart\n"
-"POT-Creation-Date: 2014-10-01 14:42+0000\n"
+"POT-Creation-Date: 2016-08-12 04:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: Peter Holzer <hpeter@agitator.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,6 +15,10 @@ msgstr ""
 "Domain: bda.plone.cart\n"
 "X-Is-Fallback-For: de-at de-li de-lu de-ch de-de\n"
 
+#: ./profiles.zcml:12
+msgid "A generic cart"
+msgstr ""
+
 #: ./browser/__init__.py:202
 msgid "Add Cart Portlet"
 msgstr "Warenkorb Portlet hinzufügen"
@@ -24,7 +28,7 @@ msgid "This portlet displays the shopping cart."
 msgstr "Dieses Portlet zeigt den Warenkorb"
 
 #. Default: "Article limit reached"
-#: ./__init__.py:287
+#: ./__init__.py:313
 msgid "article_limit_reached"
 msgstr "Die gewünschte Bestellmenge übersteigt die maximale Bestellmenge für diesen Artikel."
 
@@ -32,9 +36,13 @@ msgstr "Die gewünschte Bestellmenge übersteigt die maximale Bestellmenge für 
 msgid "back"
 msgstr "zurück"
 
+#: ./profiles.zcml:12
+msgid "bda.plone.cart"
+msgstr ""
+
 #. Default: "Cart"
 #: ./browser/__init__.py:168
-#: ./browser/portlet.pt:8
+#: ./browser/portlet.pt:6
 #: ./browser/view.pt:18
 msgid "cart"
 msgstr "Warenkorb"
@@ -80,8 +88,8 @@ msgid "cart_not_a_number"
 msgstr "Die Eingabe ist keine Zahl"
 
 #. Default: "Cart"
-#: ./browser/portlet.pt:8
-#: ./browser/viewlet.pt:5
+#: ./browser/portlet.pt:6
+#: ./browser/viewlet.pt:8
 msgid "cart_summary"
 msgstr "Warenkorb"
 
@@ -91,9 +99,9 @@ msgid "cart_total_limit_reached"
 msgstr "Die gewünschte Bestellmenge übersteigt die maximale Gesamtbestellmenge."
 
 #. Default: "Checkout"
-#: ./browser/portlet.pt:20
+#: ./browser/portlet.pt:18
 #: ./browser/summary.pt:113
-#: ./browser/viewlet.pt:19
+#: ./browser/viewlet.pt:21
 msgid "checkout"
 msgstr "zur Kasse"
 
@@ -127,9 +135,10 @@ msgstr "Rabatt USt."
 msgid "empty_cart"
 msgstr "Warenkorb ist leer"
 
-#. Default: "Price"
+#. Default: "Price:"
 #: ./browser/summary.pt:43
 #: ./browser/tile.pt:42
+#, fuzzy
 msgid "price"
 msgstr "Preis:"
 
@@ -145,9 +154,10 @@ msgstr "aus Warenkorb entfernen"
 msgid "summary_net"
 msgstr "Netto:"
 
-#. Default: "Shipping"
+#. Default: "Shipping:"
 #: ./browser/summary.pt:92
 #: ./browser/tile.pt:89
+#, fuzzy
 msgid "summary_shipping"
 msgstr "Versandkosten"
 
@@ -164,7 +174,7 @@ msgid "summary_vat"
 msgstr "USt.:"
 
 #. Default: "Not enough items available, abort."
-#: ./__init__.py:301
+#: ./__init__.py:327
 msgid "trying_to_add_more_items_than_available"
 msgstr "Verfügbarkeit zu gering, abbruch"
 
@@ -173,4 +183,3 @@ msgstr "Verfügbarkeit zu gering, abbruch"
 #: ./browser/tile.pt:22
 msgid "update_cart"
 msgstr "Warenkorb aktualisieren"
-

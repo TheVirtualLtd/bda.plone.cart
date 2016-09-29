@@ -236,6 +236,12 @@
             } else {
                 $('.shipping', this.cart_node).css('display', 'none');
             }
+            if (data.cart_settings.include_surcharge) {
+                $('.display_surcharge', this.cart_node).css('display', 'table-row');
+            } else {
+                $('.display_surcharge', this.cart_node).css('display', 'none');
+            }
+
             $('#cart_summary', this.cart_node).css('display', 'block');
             $('.cart_total_count').html(cart_total_count);
             if (render_no_longer_available) {

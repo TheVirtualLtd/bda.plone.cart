@@ -8,6 +8,7 @@ from bda.plone.cart.interfaces import ICartItemDiscount
 from bda.plone.cart.interfaces import ICartItemPreviewImage
 from bda.plone.cart.interfaces import ICartItemState
 from bda.plone.cart.interfaces import ICartItemStock
+from bda.plone.payment.interfaces import ISurcharge
 from bda.plone.shipping import Shippings
 from bda.plone.shipping.interfaces import IItemDelivery
 from bda.plone.shipping.interfaces import IShippingItem
@@ -68,6 +69,7 @@ def deletecookie(request):
     """Delete the cart cookie.
     """
     request.response.expireCookie('cart', path='/')
+    request.response.expireCookie('payment_method', path='/')
 
 
 def extractitems(items):
@@ -101,6 +103,31 @@ def aggregate_cart_item_count(target_uid, items):
     return aggregated_count
 
 
+def add_item_to_cart(request, uid, count=1, comment=''):
+    """Add an item to the cart by uid
+    """
+    original_items = extractitems(readcookie(request))
+    cookie_items = list()
+    for orig_uid, orig_count, orig_comment in original_items:
+        # Update existing cart item when uid and comment match
+        if uid == orig_uid and comment == orig_comment and count:
+            orig_count = orig_count + count
+            count = 0  # ensure we only add items once
+
+        cookie_items.append(
+            orig_uid + ';' + urllib2.quote(orig_comment) + ':' +
+            str(orig_count))
+
+    if count:
+        cookie_items.append(
+            uid + ';' + urllib2.quote(comment) + ':' + str(count))
+
+    cookie = ','.join(cookie_items)
+    request.response.setCookie('cart', cookie, quoted=False, path='/')
+    # update the request to ensure it is consistent with the response cookie
+    request.cookies['cart'] = cookie
+
+
 def remove_item_from_cart(request, uid):
     """Remove single item from cart by uid.
     """
@@ -125,6 +152,16 @@ def cart_item_shippable(context, item):
     if shipping_info:
         return shipping_info.shippable
     return False
+
+
+def payment_surchargable(self, payment_method):
+    # XXX - this should look up an interface to determine whether a
+    # surcharge should be applied to the current payment method
+    surcharge = queryAdapter(self.context, ISurcharge)
+    if payment_method in surcharge.payment_method_surchargeable:
+        return True
+    else:
+        return False
 
 
 @implementer(ICartDataProvider)
@@ -185,6 +222,19 @@ class CartDataProviderBase(object):
                 # B/C for bda.plone.cart < 0.6 custom templates
                 ret['cart_summary']['cart_shipping'] = \
                     ascur(shipping['net'] + shipping['vat'])
+            # XXX tax calculation needs thinking about! Tax displayed in
+            # checkout is not currently calculated to include surcharge vat
+            payment_method = (
+                    self.request.get('checkout.payment_selection.payment') or
+                    self.request.cookies.get('payment_method'))
+            if payment_method or self.include_surcharge:
+                ret['cart_summary']['payment_method'] = payment_method
+                if payment_surchargable(self, payment_method):
+                    ret['cart_settings']['include_surcharge'] = True
+                    surcharge = self.surcharge(total)
+                    ret['cart_summary']['surcharge'] = \
+                        ascur(surcharge['surcharge_total'])
+                    total += surcharge['surcharge_total']
             ret['cart_summary']['cart_total'] = ascur(total)
             ret['cart_summary']['cart_total_raw'] = total
         return ret
@@ -203,6 +253,11 @@ class CartDataProviderBase(object):
         if self.include_shipping_costs:
             shipping = self.shipping(items)
             total += shipping['net'] + shipping['vat']
+        if payment_surchargable(self, payment_method=self.data.get(
+                'cart_summary').get('payment_method')):
+            surcharge = self.surcharge(total)
+            surcharge = surcharge['surcharge_total']
+            total += surcharge
         return total.quantize(Decimal('1.000'))
 
     @property
@@ -229,6 +284,16 @@ class CartDataProviderBase(object):
     def summary_total_only(self):
         raise NotImplementedError(u"CartDataProviderBase does not implement "
                                   u"``summary_total_only``.")
+
+    @property
+    def include_surcharge(self):
+        request = self.request
+        payment_method_from_cookie = request.cookies.get('payment_method')
+        surcharge = queryAdapter(self.context, ISurcharge)
+        if (payment_method_from_cookie in
+                surcharge.payment_method_surchargeable):
+            return True
+        return False
 
     @property
     def include_shipping_costs(self):
@@ -315,6 +380,14 @@ class CartDataProviderBase(object):
     def vat(self, items):
         raise NotImplementedError(u"CartDataProviderBase does not implement "
                                   u"``vat``.")
+
+    def surcharge(self, working_total):
+        surcharge = queryAdapter(self.context, ISurcharge)
+        return {
+            'label': 'pxpay_payment',
+            'description': 'pxpay_payment',
+            'surcharge_total': surcharge.surcharge(working_total),
+            }
 
     def shipping(self, items):
         shippings = Shippings(self.context)

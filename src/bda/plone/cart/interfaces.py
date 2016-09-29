@@ -32,10 +32,15 @@ class ICartDataProvider(Interface):
     summary_total_only = Attribute(u"Flag whether to show total sum only in "
                                    u"summary.")
 
+    include_surcharge = Attribute(u"Flag whether to include and "
+                                  u"display surcharge costs.")
+
     include_shipping_costs = Attribute(u"Flag whether to include and display "
                                        u"shipping costs.")
 
     shipping_method = Attribute(u"Current shipping method identifyer.")
+
+    payment_method = Attribute(u"Payment method identifier.")
 
     checkout_url = Attribute(u"URL to checkout form.")
 
@@ -79,6 +84,18 @@ class ICartDataProvider(Interface):
 
         :param items: items in the cart
         :param type: list of 3-tuples containing ``(uid, count, comment)``
+        """
+
+    def surcharge(working_total):
+        """Calculate surcharge and return as Decimal
+
+        return {
+            'label':
+            'description':
+            'surcharge': payment_settings.surcharge(working_total)
+            }
+
+        :param working_total: cart total
         """
 
     def shipping(items):

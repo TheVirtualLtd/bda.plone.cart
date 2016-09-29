@@ -60,7 +60,6 @@
     permission="zope2.View"
     layer="..interfaces.ICartExtensionLayer" />
 
-  <!-- generic resources -->
   <browser:resource
     name="bda.plone.cart.js"
     file="cart.js"
@@ -115,6 +114,13 @@
     zcml:condition="have plone-5"
     name="bda.plone.cart.font"
     directory="font"
+    layer="..interfaces.ICartExtensionLayer" />
+
+  <browser:page
+    for="*"
+    name="add_to_cart"
+    class=".AddToCart"
+    permission="zope2.View"
     layer="..interfaces.ICartExtensionLayer" />
 
 </configure>

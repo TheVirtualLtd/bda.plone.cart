@@ -1,20 +1,18 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: bda cart no translation\n"
+"Project-Id-Version: bda.plone.cart\n"
 "POT-Creation-Date: 2016-08-12 04:48+0000\n"
-"PO-Revision-Date: 2013-06-10 11:25+0100\n"
-"Last-Translator: Espen Moe-Nilssen <espen@medialog.no>\n"
-"Language-Team: LANGUAGE <espen@medialog.no>\n"
+"PO-Revision-Date: 2014-06-04 14:33 +1200\n"
+"Last-Translator: Robyn James <robyn@thevirtual.co.nz>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"Language-Code: no\n"
-"Language-Name: Norsk\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en-gb\n"
+"Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: DOMAIN\n"
-"Language: nb_NO\n"
-"X-Generator: Poedit 1.5.5\n"
+"Domain: bda.plone.cart\n"
 
 #: ./profiles.zcml:12
 msgid "A generic cart"
@@ -22,20 +20,20 @@ msgstr ""
 
 #: ./browser/__init__.py:202
 msgid "Add Cart Portlet"
-msgstr "Legg til handlekurvboks"
+msgstr "Add Cart Portlet"
 
 #: ./browser/__init__.py:203
 msgid "This portlet displays the shopping cart."
-msgstr "Denne boksen viser handlekurven"
+msgstr "This portlet displays the shopping cart."
 
 #. Default: "Article limit reached"
 #: ./__init__.py:313
 msgid "article_limit_reached"
-msgstr ""
+msgstr "Cart item limit reached"
 
 #: ./browser/summary.pt:111
 msgid "back"
-msgstr "Tilbake"
+msgstr "Back"
 
 #: ./profiles.zcml:12
 msgid "bda.plone.cart"
@@ -46,17 +44,17 @@ msgstr ""
 #: ./browser/portlet.pt:6
 #: ./browser/view.pt:18
 msgid "cart"
-msgstr "Handlekurv"
+msgstr "Cart"
 
 #. Default: "Comment is required"
 #: ./browser/__init__.py:59
 msgid "cart_comment_required"
-msgstr ""
+msgstr "Comment is required"
 
 #. Default: "Input not an integer"
 #: ./browser/__init__.py:63
 msgid "cart_integer_required"
-msgstr ""
+msgstr "Input not an integer"
 
 #. Default: "Item has been added to cart"
 #: ./browser/__init__.py:72
@@ -76,111 +74,112 @@ msgstr ""
 #. Default: "Unique article limit reached"
 #: ./browser/__init__.py:55
 msgid "cart_max_unique_articles_reached"
-msgstr ""
+msgstr "Unique item limit reached"
 
 #. Default: "One or more items in cart are only partly or no longer available. Please update or remove related items"
 #: ./browser/__init__.py:67
 msgid "cart_no_longer_available"
-msgstr ""
+msgstr "One or more items in cart are only partly or no longer availabale. Please update or remove the relevant items."
 
 #. Default: "Input not a number"
 #: ./browser/__init__.py:51
 msgid "cart_not_a_number"
-msgstr ""
+msgstr "Input is not a number"
 
 #. Default: "Cart"
 #: ./browser/portlet.pt:6
 #: ./browser/viewlet.pt:8
 msgid "cart_summary"
-msgstr "Handlekurv"
+msgstr "Cart"
 
 #. Default: "Total limit reached"
 #: ./browser/__init__.py:47
 msgid "cart_total_limit_reached"
-msgstr ""
+msgstr "Total limit reached"
 
 #. Default: "Checkout"
 #: ./browser/portlet.pt:18
 #: ./browser/summary.pt:113
 #: ./browser/viewlet.pt:21
 msgid "checkout"
-msgstr "Til kassen"
+msgstr "Checkout"
 
 #. Default: "Comment"
 #: ./browser/summary.pt:18
 #: ./browser/tile.pt:38
+#, fuzzy
 msgid "comment"
-msgstr "Kommentar"
+msgstr "Comment:"
 
 #. Default: "Discount Net:"
 #: ./browser/summary.pt:73
 #: ./browser/tile.pt:70
 msgid "discount_net"
-msgstr ""
+msgstr "Net Discount"
 
 #. Default: "Discount Total:"
 #: ./browser/summary.pt:84
 #: ./browser/tile.pt:81
 msgid "discount_total"
-msgstr ""
+msgstr "Total Discount"
 
 #. Default: "Discount VAT.:"
 #: ./browser/summary.pt:78
 #: ./browser/tile.pt:75
 msgid "discount_vat"
-msgstr ""
+msgstr "Discount VAT"
 
 #. Default: "Cart is empty"
 #: ./browser/summary.pt:55
 #: ./browser/tile.pt:51
 msgid "empty_cart"
-msgstr "Handlekurven er tom"
+msgstr "Cart is empty"
 
 #. Default: "Price:"
 #: ./browser/summary.pt:43
 #: ./browser/tile.pt:42
 #, fuzzy
 msgid "price"
-msgstr "Pris:"
+msgstr "Price:"
 
 #. Default: "Remove from cart"
 #: ./browser/summary.pt:36
 #: ./browser/tile.pt:31
 msgid "remove_from_cart"
-msgstr "Fjern fra handlekurven"
+msgstr "Remove from cart"
 
 #. Default: "Net:"
 #: ./browser/summary.pt:63
 #: ./browser/tile.pt:60
 msgid "summary_net"
-msgstr "Nettopris:"
+msgstr "Net:"
 
 #. Default: "Shipping:"
 #: ./browser/summary.pt:92
 #: ./browser/tile.pt:89
 #, fuzzy
 msgid "summary_shipping"
-msgstr "Fraktkostnad"
+msgstr "Shipping:"
 
 #. Default: "Total:"
 #: ./browser/summary.pt:100
 #: ./browser/tile.pt:95
 msgid "summary_total"
-msgstr "Totalt:"
+msgstr "Total:"
 
 #. Default: "VAT.:"
 #: ./browser/summary.pt:68
 #: ./browser/tile.pt:65
 msgid "summary_vat"
-msgstr "moms: "
+msgstr "VAT:"
 
 #. Default: "Not enough items available, abort."
 #: ./__init__.py:327
 msgid "trying_to_add_more_items_than_available"
-msgstr ""
+msgstr "Not enough stock available, aborting."
 
 #. Default: "Update cart"
 #: ./browser/summary.pt:27
 #: ./browser/tile.pt:22
 msgid "update_cart"
-msgstr "Oppdater handlekurv"
+msgstr "Update cart"
