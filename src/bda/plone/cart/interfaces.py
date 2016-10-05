@@ -92,7 +92,8 @@ class ICartDataProvider(Interface):
         return {
             'label':
             'description':
-            'surcharge': payment_settings.surcharge(working_total)
+            'net': payment_settings.surcharge_net(working_total)
+            'vat': payment_settings.surcharge_vat(working_total)
             }
 
         :param working_total: cart total

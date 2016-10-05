@@ -13,6 +13,7 @@ from bda.plone.shipping import Shippings
 from bda.plone.shipping.interfaces import IItemDelivery
 from bda.plone.shipping.interfaces import IShippingItem
 from decimal import Decimal
+from plone import api
 from plone.uuid.interfaces import IUUID
 from Products.CMFCore.utils import getToolByName
 from zope.component import adapter
@@ -87,6 +88,9 @@ def extractitems(items):
             continue
         item = item.split(':')
         uid = item[0].split(';')[0]
+        # Ignore data from old cookies, where object no longer exists.
+        if not api.content.get(UID=uid):
+            continue
         count = item[1]
         comment = urllib2.unquote(item[0][len(uid) + 1:])
         ret.append((uid, Decimal(count), comment))
@@ -232,9 +236,11 @@ class CartDataProviderBase(object):
                 if payment_surchargable(self, payment_method):
                     ret['cart_settings']['include_surcharge'] = True
                     surcharge = self.surcharge(total)
-                    ret['cart_summary']['surcharge'] = \
-                        ascur(surcharge['surcharge_total'])
-                    total += surcharge['surcharge_total']
+                    surcharge_net = ascur(surcharge['net'])
+                    surcharge_vat = ascur(surcharge['vat'])
+                    ret['cart_summary']['surcharge_net'] = surcharge_net
+                    ret['cart_summary']['surcharge_vat'] = surcharge_vat
+                    total += (surcharge['net'] + surcharge['vat'])
             ret['cart_summary']['cart_total'] = ascur(total)
             ret['cart_summary']['cart_total_raw'] = total
         return ret
@@ -256,8 +262,9 @@ class CartDataProviderBase(object):
         if payment_surchargable(self, payment_method=self.data.get(
                 'cart_summary').get('payment_method')):
             surcharge = self.surcharge(total)
-            surcharge = surcharge['surcharge_total']
-            total += surcharge
+            surcharge_net = surcharge['net']
+            surcharge_vat = surcharge['vat']
+            total += (surcharge_net + surcharge_vat)
         return total.quantize(Decimal('1.000'))
 
     @property
@@ -386,7 +393,8 @@ class CartDataProviderBase(object):
         return {
             'label': 'pxpay_payment',
             'description': 'pxpay_payment',
-            'surcharge_total': surcharge.surcharge(working_total),
+            'net': surcharge.surcharge_net(working_total),
+            'vat': surcharge.surcharge_vat(working_total),
             }
 
     def shipping(self, items):
