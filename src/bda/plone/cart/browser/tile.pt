@@ -89,7 +89,6 @@
       </tr>
       <tr class="shipping" style="display: none;">
         <td class="summary_label">
-        <td>
           <span i18n:translate="summary_shipping">Shipping:</span>
         </td>
         <td class="shipping_total summary_ammount">0.00</td>
