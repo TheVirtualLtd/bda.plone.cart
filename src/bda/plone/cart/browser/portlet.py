@@ -40,7 +40,7 @@ class CartAssignment(base.Assignment):
 
 def render_cart(context):
     url = context.restrictedTraverse('@@plone').getCurrentUrl()
-    if url.endswith('@@cart') \
+    if url.find('@@cart') != -1 \
        or url.find('@@checkout') != -1 \
        or url.find('@@confirm_order') != -1 \
        or url.find('/portal_factory/') != -1:
@@ -57,7 +57,7 @@ class CartRenderer(base.Renderer, CartMixin):
     @property
     def available(self):
         # XXX: is customer somewhere in portal
-        return True
+        return render_cart(self.context)
 
     def update(self):
         if render_cart(self.context):
