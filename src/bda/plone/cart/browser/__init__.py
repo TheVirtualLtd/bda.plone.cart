@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
+from Products.Five import BrowserView
+from Acquisition import aq_parent
 from bda.plone.cart import CURRENCY_LITERALS
 from bda.plone.cart import add_item_to_cart
 from bda.plone.cart import get_data_provider
 from bda.plone.cart import readcookie
 from decimal import Decimal
-from Products.Five import BrowserView
+from plone import api
 from zope.i18n import translate
 from zope.i18nmessageid import MessageFactory
-
+from zope.publisher.interfaces.browser import IBrowserView
 import simplejson as json
 import zope.deferredimport
 
@@ -166,26 +168,47 @@ class CartDataView(BrowserView, DataProviderMixin):
 
 
 class AddToCart(BrowserView):
-    def add_to_cart(self, path, amount=1):
-        obj = self.context.restrictedTraverse(path)
+    def add_to_cart(self, path, quantity=1):
+        # Attempt to find product relative to current object, fall back to root
+        # of site.
+        context = self.context
+        while IBrowserView.providedBy(context):
+            context = aq_parent(context)
+        try:
+            obj = context.restrictedTraverse(path)
+        except (AttributeError, KeyError):
+            if not path.startswith('/'):
+                path = '/' + path
+            obj = api.content.get(path=path)
+
         if obj:
-            add_item_to_cart(request=self.request, uid=obj.UID(), count=amount)
+            add_item_to_cart(
+                    request=self.request,
+                    uid=obj.UID(),
+                    count=quantity
+                    )
 
     def __call__(self):
-        # setup query string as:
-        # items.path:records=item1&items.amount:records:int=1
-        #   &items.path:records=item2&items.amount:records:int=3
-        # or ?path=item1&amount=3 (amount defaults to 1)
+        # Add to cart view enabling items to be added via url query string:
+        # Replace ITEM1, ITEM2 with a relative or absolute url and X, Y with
+        # quantities (quantity defaults to 1).
+        # Single item:
+        #   @@add_to_cart?path=ITEM1&quantity=X
+        #
+        # Multiple items:
+        #    @@add_to_cart?item.path:records=ITEM1&item.quantity:records:int=X
+        #    &item.path:records=ITEM2&item.quantity:records:int=Y
+        #
 
         if 'item' in self.request.form:
             for item in self.request.form['item']:
-                self.add_to_cart(item.get('path', ''), item.get('amount', 1))
+                self.add_to_cart(item.get('path', ''), item.get('quantity', 1))
         if 'path' in self.request.form:
             try:
-                amount = int(self.request.form('amount'))
+                quantity = int(self.request.form.get('quantity'))
             except TypeError:
-                amount = 1
+                quantity = 1
 
-            self.add_to_cart(self.request.form('path'), amount)
+            self.add_to_cart(self.request.form.get('path'), quantity)
 
         return self.context()
